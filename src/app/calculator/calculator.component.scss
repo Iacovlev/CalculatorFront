@@ -1,0 +1,22 @@
+
+.container-fluid {
+    height: 740px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+   border: 1px solid #dadada;
+   height: 30px;
+   width: 98%;
+   padding: 0 5px;
+   vertical-align: bottom;
+   box-sizing: border-box;
+}
+
+.inputRes {
+  box-sizing: border-box;
+  text-align: center;
+}
+
