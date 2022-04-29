@@ -11,7 +11,8 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
   templateUrl: './calculator.component.html',
   styleUrls: ['./calculator.component.scss']
 })
-export class CalculatorComponent implements OnInit {
+
+  export class CalculatorComponent implements OnInit {
   form!: FormGroup;
   mainPage: CalcDTO = new CalcDTO();
   editing: boolean = false;
@@ -36,8 +37,6 @@ export class CalculatorComponent implements OnInit {
       result:[[data && data.result ? data.result : '']],
     })
   }
-
-
 
   input: string = '';
   result: string = '';
@@ -104,19 +103,17 @@ export class CalculatorComponent implements OnInit {
 
     save(): void {
     this.editing = false;
-      this.mainPage.input = this.input;
+       this.mainPage.input = this.input;
        this.mainPage.result = this.result;
-         console.log(this.mainPage)
-      this.mainPageService.save(this.mainPage).subscribe(data => {
-        if (data.result) {
-        console.log(data.result)
-          this.mainPage.result = data.result
-          console.log(this.mainPage.result)
-          this.input = this.mainPage.input + "=" + data.result
-//          this.result = data.result
-
-
-        }
+           console.log(this.mainPage)
+       this.mainPageService.save(this.mainPage).subscribe(data => {
+          if (data.result) {
+            console.log(data.result)
+            this.mainPage.result = data.result
+            console.log(this.mainPage.result)
+            this.input = this.mainPage.input + "=" + data.result
+  //          this.result = data.result
+          }
       })
     }
 
@@ -127,10 +124,6 @@ export class CalculatorComponent implements OnInit {
 
   oneKey(event : any) {
   this.input = event.target.value
- }
-
- getAnswer() {
-
  }
 
 }

@@ -6,32 +6,12 @@
 
     <h1 class="text-center">Calculator</h1>
 
-<!--    //Displays the User Input-->
-<!--    <div class="input-group input-group-sm col-sm-12 m-0 p-0">-->
-<!--      <div class="col-sm-12 form-control text-lg-right" type="text">{{input}}</div>-->
-<!--    </div>-->
-
-<!--    //Displays the Results-->
-<!--    <div class="input-group input-group-sm col-sm-12 m-0 p-0">-->
-<!--      <div class="form-control text-sm-right" type="text">{{result}}</div>-->
-<!--    </div>-->
-
-<!--    <form class="inputRes">-->
-<!--      <mat-form-field class="example-full-width">-->
-<!--        <div>-->
-<!--          <input class="inputtp" type="text" value= {{input}}>-->
-<!--        </div>-->
-<!--      </mat-form-field>-->
-<!--    </form>-->
-
-      <div class ="inputRes" >
+    <div class ="inputRes" >
         <input type="text" #box (keyup) = "oneKey($event)" (keydown.enter) = "save()" value= {{input}} />
         <mat-error>
           {{'Press number'}}
         </mat-error>
-
-      </div>
-
+    </div>
 
 
     <div class="col-sm-12 p-1 m-0">
@@ -62,10 +42,7 @@
       <button class="btn btn-lg btn-outline-secondary col-sm-3 p-1" type="button" (click)="press('.')">.</button>
       <button class="btn btn-lg btn-outline-secondary col-sm-3 p-1" type="button" (click)="press('0')">0</button>
       <button class="btn btn-lg btn-success col-sm-6 p-1" type="button" (click)="save()">=</button>
-
-
+      </div>
+    </div>
   </div>
-
-  </div>
-</div>
 
