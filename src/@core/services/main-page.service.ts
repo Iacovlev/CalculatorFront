@@ -17,7 +17,6 @@ export class MainPageService {
   ) { }
 
   save(mainPage: CalcDTO): Observable<CalcDTO> {
-    console.log(mainPage)
     return this.http.post<CalcDTO>(`${this.url}/`, mainPage);
   }
 
