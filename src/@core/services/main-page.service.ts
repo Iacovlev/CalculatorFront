@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CalcDTO } from 'src/@core/DTO/CalcDTO';
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { interval, lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +15,12 @@ export class MainPageService {
   constructor(
     private http: HttpClient
   ) { }
-
-  save(mainPage: CalcDTO): Observable<CalcDTO> {
-    return this.http.post<CalcDTO>(`${this.url}/`, mainPage);
+save(mainPage: CalcDTO): Promise<CalcDTO> {
+    return lastValueFrom((this.http.post<CalcDTO>(`${this.url}/`, mainPage)))
   }
 
-  getById(id: number): Observable<CalcDTO> {
-    return this.http.get<CalcDTO>(`${this.url}/${id}`)
+  getById(id: number): Promise<CalcDTO> {
+    return lastValueFrom((this.http.get<CalcDTO>(`${this.url}/${id}`)));
   }
 }
 

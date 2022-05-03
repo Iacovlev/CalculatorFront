@@ -30,8 +30,8 @@ import { MainPageService } from 'src/@core/services/main-page.service';
 
   initForm(): void{
     this.form = this.formBuilder.group({
-      input: [[this.input ? this.input : ''], [Validators.required, Validators.pattern('[0-9]')]],
-      result:[[this.result ? this.result : '']],
+      input: [[''], [Validators.required, Validators.pattern('[0-9]')]],
+      result:[['']],
     })
   }
 
@@ -50,19 +50,25 @@ import { MainPageService } from 'src/@core/services/main-page.service';
     this.input = "";
   }
 
-    save(): void {
-    this.editing = false;
-       this.mainPage.input = this.input;
-       this.mainPage.result = this.result;
+    async save(): Promise<void> {
+        this.editing = false;
+           this.mainPage.input = this.input;
+           this.mainPage.result = this.result;
 
-       this.mainPageService.save(this.mainPage).subscribe(data => {
-          if (data.result) {
-            this.mainPage.result = data.result
-            this.input = this.mainPage.input + "=" + data.result
-  //          this.result = data.result
-          }
-      })
+           try {
+           const data =  await this.mainPageService.save(this.mainPage)
+
+             if (data.result) {
+                               this.mainPage.result = data.result
+                               this.input = this.mainPage.input + "=" + data.result
+    //                            this.result = data.result
+           }
+      } catch(error) {
+            console.log(error)
+           }
     }
+
+
 
   press(n : string) {
   this.input += n;
