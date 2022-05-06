@@ -65,7 +65,8 @@ import { MainPageService } from 'src/@core/services/main-page.service';
 
          if (data.result) {
             this.mainPage.result = data.result
-            this.input = this.mainPage.input + "=" + data.result                
+            this.input = this.mainPage.input + "=" + data.result  
+            console.log(this.input)              
         } 
     
       } catch(error) {
@@ -78,6 +79,7 @@ import { MainPageService } from 'src/@core/services/main-page.service';
         try {
           const data =  await this.mainPageService.getAll(this.mainPage)
           this.history = data.reverse()
+          console.log(this.history)
         
         } catch(error) {
           console.log(error)
@@ -89,8 +91,7 @@ import { MainPageService } from 'src/@core/services/main-page.service';
           try {
             this.history = []
             await this.mainPageService.deleteAll()
-            
-            
+
           } catch(error) {
             console.log(error)
           }

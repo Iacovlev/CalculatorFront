@@ -28,8 +28,8 @@ export class MainPageService {
     return lastValueFrom((this.http.get<CalcDTO[]>(`${this.url}/all`)));
   }
 
-  deleteAll(): Promise<CalcDTO> {
-    return lastValueFrom((this.http.delete<CalcDTO>(`${this.url}/delete/all`)))
+  deleteAll(): Promise<void> {
+    return lastValueFrom((this.http.get<void>(`${this.url}/delete/all`)))
   }
 }
 
