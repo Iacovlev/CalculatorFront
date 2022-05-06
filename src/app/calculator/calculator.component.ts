@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { last } from 'rxjs';
 import { CalcDTO } from 'src/@core/DTO/CalcDTO';
 import { MainPageService } from 'src/@core/services/main-page.service';
+
 
 
 @Component({
@@ -17,6 +17,7 @@ import { MainPageService } from 'src/@core/services/main-page.service';
   editing: boolean = false;
   hide = true;
 
+
   constructor(
     private formBuilder: FormBuilder,
     private mainPageService: MainPageService,
@@ -26,7 +27,9 @@ import { MainPageService } from 'src/@core/services/main-page.service';
 
   ngOnInit(): void {
     this.initForm();
+    this.getAll();
   }
+
 
   initForm(): void{
     this.form = this.formBuilder.group({
@@ -37,6 +40,8 @@ import { MainPageService } from 'src/@core/services/main-page.service';
 
   input: string = '';
   result: string = '';
+  history: CalcDTO[] = [];
+  
 
 
   clear() {
@@ -51,25 +56,46 @@ import { MainPageService } from 'src/@core/services/main-page.service';
   }
 
     async save(): Promise<void> {
-        this.editing = false;
-           this.mainPage.input = this.input;
-           this.mainPage.result = this.result;
+      this.editing = false;
+       this.mainPage.input = this.input;
+       this.mainPage.result = this.result;
 
-           try {
-           const data =  await this.mainPageService.save(this.mainPage)
+       try {
+       const data =  await this.mainPageService.save(this.mainPage)
 
-             if (data.result) {
-                               this.mainPage.result = data.result
-                               this.input = this.mainPage.input + "=" + data.result
-    //                            this.result = data.result
-           }
+         if (data.result) {
+            this.mainPage.result = data.result
+            this.input = this.mainPage.input + "=" + data.result                
+        } 
+    
       } catch(error) {
+        console.log(error)
+       }
+  }  
+
+     async getAll(): Promise<void> {
+      
+        try {
+          const data =  await this.mainPageService.getAll(this.mainPage)
+          this.history = data.reverse()
+        
+        } catch(error) {
+          console.log(error)
+          }
+        }
+
+        async deleteAll(): Promise<void> {
+
+          try {
+            this.history = []
+            await this.mainPageService.deleteAll()
+            
+            
+          } catch(error) {
             console.log(error)
-           }
-    }
-
-
-
+          }
+        }
+  
   press(n : string) {
   this.input += n;
   }

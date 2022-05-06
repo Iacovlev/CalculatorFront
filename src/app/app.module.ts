@@ -16,9 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     CalculatorComponent,
-    
-    
-    ],
+  ],
+
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
+    
     
     
   ],

@@ -1,13 +1,13 @@
 
 
 <div class="container-fluid">
-
+  
   <div class="jumbotron col-sm-4 p-2 m-0 bg-inverse">
 
     <h1 class="text-center">Calculator</h1>
 
     <div class ="inputRes" >
-        <input type="text" #box (keyup) = "oneKey($event)" (keydown.enter) = "save()" value= {{input}} />
+        <input type="text" #box (keyup) = "oneKey($event)" (keydown.enter) = "save()" value = {{input}} />
         <mat-error>
           {{'Press number'}}
         </mat-error>
@@ -41,8 +41,25 @@
     <div class="col-sm-12 p-1 m-0">
       <button class="btn btn-lg btn-outline-secondary col-sm-3 p-1" type="button" (click)="press('.')">.</button>
       <button class="btn btn-lg btn-outline-secondary col-sm-3 p-1" type="button" (click)="press('0')">0</button>
-      <button class="btn btn-lg btn-success col-sm-6 p-1" type="button" (click)="save()">=</button>
+      <button class="btn btn-lg btn-success col-sm-6 p-1" type="button" (click)="save()" (click)=" ngOnInit()">=</button>
       </div>
     </div>
+
+    <div class="result">
+      <h2 class="h2_res">History</h2>
+
+      <div class="result-numbers">
+        <ul *ngFor="let item of this.history">
+          <li>{{item.input}} = {{item.result}}</li>
+        </ul>
+      </div>
+      <div class="btn_delete_history">
+        <button class="btn_delete" (click)="deleteAll()">
+        <mat-icon>delete</mat-icon>
+      </button>
+      </div>
+      
+    </div>
+  
   </div>
 

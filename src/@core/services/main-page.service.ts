@@ -15,12 +15,21 @@ export class MainPageService {
   constructor(
     private http: HttpClient
   ) { }
-save(mainPage: CalcDTO): Promise<CalcDTO> {
-    return lastValueFrom((this.http.post<CalcDTO>(`${this.url}/`, mainPage)))
+
+  save(mainPage: CalcDTO): Promise<CalcDTO> {
+    return lastValueFrom((this.http.post<CalcDTO>(`${this.url}/`, mainPage))) 
   }
 
   getById(id: number): Promise<CalcDTO> {
     return lastValueFrom((this.http.get<CalcDTO>(`${this.url}/${id}`)));
+  }
+
+  getAll(mainPage: CalcDTO): Promise<CalcDTO[]> {
+    return lastValueFrom((this.http.get<CalcDTO[]>(`${this.url}/all`)));
+  }
+
+  deleteAll(): Promise<CalcDTO> {
+    return lastValueFrom((this.http.delete<CalcDTO>(`${this.url}/delete/all`)))
   }
 }
 
