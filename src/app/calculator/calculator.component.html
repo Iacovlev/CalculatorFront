@@ -1,13 +1,13 @@
 
 
 <div class="container-fluid">
-  
+
   <div class="jumbotron col-sm-4 p-2 m-0 bg-inverse">
 
     <h1 class="text-center">Calculator</h1>
 
     <div class ="inputRes" >
-        <input type="text" #box (keyup) = "oneKey($event)" (keydown.enter) = "save()" value = {{input}} />
+        <input type="text" #box (keyup) = "oneKey($event)" (keydown.enter) = "save()" (keydown.enter) = "getAll()" value = {{input}} />
         <mat-error>
           {{'Press number'}}
         </mat-error>
@@ -59,8 +59,8 @@
       </button>
       </div>
 
-      
+
     </div>
-  
+
   </div>
 
