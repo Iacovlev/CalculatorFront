@@ -7,7 +7,7 @@
     <h1 class="text-center">Calculator</h1>
 
     <div class ="inputRes" >
-        <input type="text" #box (keyup) = "oneKey($event)" (keydown.enter) = "save()" (keydown.enter) = "getAll()" value = {{input}} />
+        <input type="text" #box (keyup) = "oneKey($event)" (keydown.enter) = "save()" value = {{input}} />
         <mat-error>
           {{'Press number'}}
         </mat-error>
@@ -41,26 +41,32 @@
     <div class="col-sm-12 p-1 m-0">
       <button class="btn btn-lg btn-outline-secondary col-sm-3 p-1" type="button" (click)="press('.')">.</button>
       <button class="btn btn-lg btn-outline-secondary col-sm-3 p-1" type="button" (click)="press('0')">0</button>
-      <button class="btn btn-lg btn-success col-sm-6 p-1" type="button" (click)="save()" (click)="getAll()">=</button>
+      <button class="btn btn-lg btn-success col-sm-6 p-1" type="button" (click)="save()">=</button>
       </div>
     </div>
 
-    <div class="result">
+    <div class="result" *ngIf = "show; else hide">
       <h2 class="h2_res">History</h2>
 
       <div class="result-numbers">
         <ul *ngFor="let item of this.history">
           <li>{{item.input}} = {{item.result}}</li>
         </ul>
-      </div>
+       </div>
+
       <div class="btn_delete_history">
         <button class="btn_delete" (click)="deleteAll()">
         <mat-icon>delete</mat-icon>
       </button>
       </div>
+  </div>
+  <div class="hide_history">
+    <button mat-button class="hide_history_btn" (click) = "pressForHide()">
+      <mat-icon>{{show ? "arrow_back" : "arrow_forward"}}</mat-icon>
+    </button>
 
-
-    </div>
+  <ng-template #hide>{{""}}</ng-template>
+  </div>
 
   </div>
 

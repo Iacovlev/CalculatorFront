@@ -41,7 +41,9 @@ import { MainPageService } from 'src/@core/services/main-page.service';
   input: string = '';
   result: string = '';
   history: CalcDTO[] = [];
-  
+  show: boolean = true;
+
+
 
 
   clear() {
@@ -65,22 +67,24 @@ import { MainPageService } from 'src/@core/services/main-page.service';
 
          if (data.result) {
             this.mainPage.result = data.result
-            this.input = this.mainPage.input + "=" + data.result  
-            console.log(this.input)              
-        } 
-    
+            this.input = this.mainPage.input + "=" + data.result
+            console.log(this.input)
+        }
+
+        await this.getAll();
+
       } catch(error) {
         console.log(error)
        }
-  }  
+  }
 
      async getAll(): Promise<void> {
-      
+
         try {
           const data =  await this.mainPageService.getAll(this.mainPage)
           this.history = data.reverse()
           console.log(this.history)
-        
+
         } catch(error) {
           console.log(error)
           }
@@ -96,13 +100,17 @@ import { MainPageService } from 'src/@core/services/main-page.service';
             console.log(error)
           }
         }
-  
+
   press(n : string) {
   this.input += n;
   }
 
   oneKey(event : any) {
   this.input = event.target.value
+ }
+
+ pressForHide() { 
+ this.show=!this.show;
  }
 
 }
